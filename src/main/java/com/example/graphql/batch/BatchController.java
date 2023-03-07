@@ -14,8 +14,9 @@ class BatchController {
 
   private final Map<Post, Collection<PostComment>> comments = Map.of(
       new Post(1, "Russia attacks Ukraine", "Russia is a terrorist state"),
-      List.of(new PostComment(1, "+1")),
-      new Post(2, "Putin must d i e", "Puck Futin"), List.of(new PostComment(2, "+2")));
+      List.of(new PostComment(1, "+1"), new PostComment(1, "+11")),
+      new Post(2, "Putin must d i e", "Puck Futin"),
+      List.of(new PostComment(2, "+2"), new PostComment(2, "+22")));
 
   @QueryMapping
   Collection<Post> posts() {
