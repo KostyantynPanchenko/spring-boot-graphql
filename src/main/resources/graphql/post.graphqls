@@ -1,6 +1,7 @@
 type Query {
 
-    posts: [Post]
+    posts: [Post],
+    postById(id: ID): Post
 
 }
 

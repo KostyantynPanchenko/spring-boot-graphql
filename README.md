@@ -1,5 +1,87 @@
 # Getting Started
 
+## How To
+
+* Start the app
+* Open [GraphiQL web interface](localhost:8080/graphiql)
+* Issue request
+* Examine response
+
+## Request and response examples
+
+* all posts
+```graphql
+query {
+  posts {
+    id,
+    title,
+    comments {
+      id,
+      comment
+    }
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "posts": [
+      {
+        "id": "1",
+        "title": "Russia attacks Ukraine",
+        "comments": [
+          {
+            "id": "1",
+            "comment": "+1"
+          },
+          {
+            "id": "1",
+            "comment": "+11"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Putin must d i e",
+        "comments": [
+          {
+            "id": "2",
+            "comment": "+2"
+          },
+          {
+            "id": "2",
+            "comment": "+22"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+* get one by id
+
+```graphql
+query {
+  postById(id:1) {
+    id,
+    title
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "postById": {
+      "id": "1",
+      "title": "Russia attacks Ukraine"
+    }
+  }
+}
+```
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 

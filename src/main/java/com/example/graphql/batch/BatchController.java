@@ -5,6 +5,7 @@ import com.example.graphql.model.PostComment;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -36,4 +37,12 @@ class BatchController {
     return postComments.get(post);
   }
   */
+
+  @QueryMapping
+  Post postById(final @Argument Integer id) {
+    return postComments.keySet().stream()
+        .filter(post -> post.id().equals(id))
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("Post with specified id not found"));
+  }
 }
