@@ -10,6 +10,8 @@ import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Controller
 class BatchController {
@@ -21,8 +23,8 @@ class BatchController {
       List.of(new PostComment(2, "+2"), new PostComment(2, "+22")));
 
   @QueryMapping
-  Collection<Post> posts() {
-    return postComments.keySet();
+  Flux<Post> posts() {
+    return Flux.just(postComments.keySet().toArray(new Post[0]));
   }
 
   @BatchMapping(typeName = "Post", field = "comments")
@@ -39,10 +41,11 @@ class BatchController {
   */
 
   @QueryMapping
-  Post postById(final @Argument Integer id) {
+  Mono<Post> postById(final @Argument Integer id) {
     return postComments.keySet().stream()
         .filter(post -> post.id().equals(id))
         .findFirst()
+        .map(Mono::just)
         .orElseThrow(() -> new IllegalArgumentException("Post with specified id not found"));
   }
 }
