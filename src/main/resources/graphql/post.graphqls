@@ -5,6 +5,10 @@ type Query {
 
 }
 
+type Mutation {
+    addPost(title: String, content: String): Post
+}
+
 type Post {
     id: ID,
     title: String,

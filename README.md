@@ -10,6 +10,8 @@
 ## Request and response examples
 
 * all posts
+
+request:
 ```graphql
 query {
   posts {
@@ -23,6 +25,7 @@ query {
 }
 ```
 
+response:
 ```json
 {
   "data": {
@@ -62,6 +65,7 @@ query {
 
 * get one by id
 
+request:
 ```graphql
 query {
   postById(id:1) {
@@ -71,12 +75,38 @@ query {
 }
 ```
 
+response:
 ```json
 {
   "data": {
     "postById": {
       "id": "1",
       "title": "Russia attacks Ukraine"
+    }
+  }
+}
+```
+* add new post
+
+request:
+```graphql
+mutation {
+  addPost(title: "new post title", content: "new post content") {
+    id,
+    title,
+    content
+  }
+}
+```
+
+response:
+```json
+{
+  "data": {
+    "addPost": {
+      "id": "3",
+      "title": "new post title",
+      "content": "new post content"
     }
   }
 }
